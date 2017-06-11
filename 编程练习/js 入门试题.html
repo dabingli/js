@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+<head>
+	<title>js 入门试题</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	第一题<br />
+	<br />
+	小明有10元钱，买了一个本，花了5元，小红说:"你剩下的钱加上我的6元钱，就可以买个铅笔盒了。<br />
+	1.定义变量num1,并计算小明剩下多少钱。<br />
+	2.定义变量num2,并计算小红花多少钱买铅笔盒。<br />
+	<br /><br />
+	答：<br>
+	<script type="text/javascript">
+		var num1, num2;
+		num1 = 10 - 5;
+		num2 = num1 + 6;
+		document.write("小明剩下"+num1+"<br />");
+		document.write("小红花了"+num2+"买铅笔盒");
+	</script>
+
+	<hr>
+	第二题<br>
+	使用Javascript语言，把以下数组<br>
+<br>
+	   var  arr = ['*','##',"***","&&","****","##*"];<br>
+<br>
+	   arr[7] = "**";<br>
+<br>
+	在页面显示如下图所示的图案：<br>
+<br>
+	*
+<br>
+	**
+<br>
+	***
+<br>
+	**** 
+
+	<br>
+	答案：
+	<br>
+	<script type="text/javascript">
+		//创建数组
+		 var  arr = ['*','##',"***","&&","****","##*"];
+		 arr[7] = "**";
+		 //数组长度
+		 var l = arr.length;
+		 
+		 //删除数组中非*的项
+		 var i = 0;
+		 for(; i < l; i++){
+		     var val = arr[i];
+     			if(val != undefined) {
+		       		var newarr = val.split('');
+		       		var newl = newarr.length;
+		       		for(var j = 0; j < newl; j++){
+		       		       if(newarr[j] != '*'){
+			       		        arr.splice(i, 1);
+			       		        break;
+			       		 }
+			         }
+		     }
+		 }
+		 //按照字符数排序
+		 arr.sort(function(a, b){
+		     if(a.length > b.length){
+		         return 1
+		     }else if(a.length < b.length){
+		         return -1
+		     }else{
+		         return 0
+		     }
+		 })
+		    
+		 
+		 //将数组内容输出，完成达到的效果。
+		 for(var i = 0; i < l; i++){
+		     if(arr[i] != undefined){
+		     document.write(arr[i] + '<br />')
+		     }
+		 }
+	</script>
+
+	<hr>
+	break退出循环<br>
+	考试成绩输出，如果成绩及格继续输出下个成绩，如果成绩不及格，退出并且后面成绩不输出， 我们使用break语句，退出循环。<br>
+	成绩为[70,80,66,90,50,100,89]<br>
+	<script type="text/javascript">
+		var num = new Array(70,80,66,90,50,100,89);
+		    
+		    var i=0;
+		    for(i=0;i<num.length;i++){
+		        if(num[i]<60){
+		            document.write("成绩"+num[i]+"不及格，不用循环了"+"<br>");
+		            break;
+		        }
+		        document.write("成绩"+num[i]+"及格，继续循环"+"<br>");
+		    }
+	</script>
+	<hr>
+	继续循环continue<br>
+	考试成绩输出，如果成绩及格继续输出下个成绩，如果成绩不及格，则不输出该成绩<br>
+	成绩为[70,80,66,90,50,100,89]<br>
+	<script type="text/javascript">
+		var num = new Array(70,80,66,90,50,100,89);
+		for(var i=0;i<num.length;i++){
+			if(num[i] < 60){
+				document.write("成绩不及格，不输出！"+"<br>");
+				continue;
+			}
+			document.write("成绩:"+num[i]+"及格，输出!"+"<br>");
+		}
+	</script>
+	<hr>
+	问题三<br>
+	在一个大学的编程选修课班里，我们得到了一组参加该班级的学生数据，分别是姓名、性别、年龄和年级，接下来呢，我们要利用JavaScript的知识挑出其中所有是大一的女生的的名字哦。<br>
+
+	学生信息如下：<br>
+
+	    ('小A','女',21,'大一'),  ('小B','男',23,'大三'),<br>
+
+	    ('小C','男',24,'大四'),  ('小D','女',21,'大一'),<br>
+
+	    ('小E','女',22,'大四'),  ('小F','男',21,'大一'),<br>
+
+	    ('小G','女',22,'大二'),  ('小H','女',20,'大三'),<br>
+
+	    ('小I','女',20,'大一'),  ('小J','男',20,'大三')<br>
+<br>
+	任务<br>
+	第一步： 把这些数据组成一个数组，方便我们之后操作哦。<br>
+
+	第二步： 筛选数据吧，首先找出都是大一的所有信息 ;<br>
+
+	第三步： 最后再一次筛选上一步得到的数据，打印出都是女生的姓名 ;<br>
+
+	提示: 可以用switch 或 if 语句进行筛选。<br>
+
+	<script type="text/javascript">
+		var arr = [
+			['小A','女',21,'大一'],
+			['小B','男',23,'大三'],
+			['小C','男',24,'大四'],
+			['小C','男',24,'大四'],
+			['小D','女',21,'大一'],
+			['小E','女',22,'大四'],
+			['小F','男',21,'大一'],
+			['小G','女',22,'大二'],
+			['小H','女',20,'大三'],
+			['小I','女',20,'大一'],
+			['小J','男',20,'大三']
+		]
+		newarr = [];
+		for(var i=0;i<arr.length;i++){
+			if(arr[i][3] ==  '大一'  &&  arr[i][1] ==  '女' ){
+				newarr.push(arr[i][0]);
+				// document.write(arr[i][0]+"<br>")
+			}
+		}
+		document.write(newarr);
+	</script>
+	<hr>
+	问题四<br>
+	使用JS完成一个简单的计算器功能。实现2个输入框中输入整数后，点击第三个输入框能给出2个整数的加减乘除。<br>
+
+	提示：获取元素的值设置和获取方法为：例：赋值：document.getElementById(“id”）.value = 1； 取值：var = document.getElementById(“id”）.value；<br>
+<br>
+	任务<br>
+	第一步： 创建构建运算函数count()。<br>
+	
+	第二步： 获取两个输入框中的值和获取选择框的值。<br>
+	
+	提示：document.getElementById( id名 ).value 获取或设置 id名的值。<br>
+	第三步： 获取通过下拉框来选择的值来改变加减乘除的运算法则。<br>
+	
+	提示：使用switch判断运算法则。<br>
+	第四步：  通过 = 按钮来调用创建的函数，得到结果。<br>
+	
+	注意: 使用parseInt()函数可解析一个字符串,并返回一个整数。<br>
+	<br><br>
+	计算机<br>
+	<input type="text" id="num1" value="">
+	<select name="symbol" id="symbol">
+		<option value="+">+</option>
+		<option value="-">-</option>
+		<option value="×">×</option>
+		<option value="/">/</option>
+	</select>
+	<input type="text" id="num2" value="">
+	<input type="button" id="sub" onclick="calculation()" value="计算">
+	<span id="result"></span>
+	<script type="text/javascript">
+		var calculation = function(){
+			var num1, symbol,num2,result;
+			num1 = document.getElementById("num1").value;
+			num2 = document.getElementById("num2").value;
+			symbol = document.getElementById("symbol").value;
+			switch(symbol){
+			       case "+":
+					result = parseInt(num1) + parseInt(num2);
+					break;
+				case "-":
+					result = parseInt(num1) -parseInt(num2);
+					break;
+				case "×":
+					result = parseInt(num1) * parseInt(num2);
+					break;
+				case "/":
+					result = parseInt(num1) / parseInt(num2);
+					break;
+			}
+			// console.log(result)
+			document.getElementById("result").innerHTML = " 结果："+result;
+		}
+	</script>
+</body>
+</html>

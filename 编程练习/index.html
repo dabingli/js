@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+	<title>编程练习1</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	编程练习<br>
+	制作新按钮，“新窗口打开网站” ，点击打开新窗口。<br>
+
+	任务<br>
+	1、新窗口打开时弹出确认框，是否打开<br>
+
+	提示: 使用 if 判断确认框是否点击了确定，如点击弹出输入对话框，否则没有任何操作。<br>
+	2、通过输入对话框，确定打开的网址，默认为 http：//www.imooc.com/<br>
+
+	3、打开的窗口要求，宽400像素，高500像素，无菜单栏、无工具栏。<br>
+
+	<hr>
+	<input type="button" onclick="openWindow()" value="点击我">
+	<script type="text/javascript">
+		var openWindow = function(){
+			var temp = confirm("是否打开新的网页?");
+			if(temp){
+				var url = prompt("请输入你要打开的页面","https://www.baidu.com")
+				window.open(url,'_blank','width=400,height=500,menuba=0,toolbar=0');
+			}
+		}
+	</script>
+</body>
+</html>
