@@ -215,5 +215,99 @@
 			document.getElementById("result").innerHTML = " 结果："+result;
 		}
 	</script>
+
+	<hr>
+	问题五<br>
+	某班的成绩出来了，现在老师要把班级的成绩打印出来。<br>
+
+	效果图:<br>
+
+	XXXX年XX月X日 星期X--班级总分为:81<br>
+	格式要求：<br>
+
+	1、显示打印的日期。 格式为类似“XXXX年XX月XX日 星期X” 的当前的时间。<br>
+
+	2、计算出该班级的平均分（保留整数）。<br>
+
+	同学成绩数据如下：<br>
+
+	"小明:87; 小花:81; 小红:97; 小天:76;小张:74;小小:94;小西:90;小伍:76;小迪:64;小曼:76"<br>
+<br>
+	任务<br>
+	第一步：可通过javascript的日期对象来得到当前的日期。<br>
+
+	第二步：一长窜的字符串不好弄，找规律后分割放到数组里更好操作哦。<br>
+
+	第三步：分割字符串得到分数，然后求和取整。<br>
+	<br><br>
+	答<br>
+	<script type="text/javascript">
+		var data = new Date();
+		var week = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+		var study = "小明:87; 小花:81; 小红:97; 小天:76;小张:74;小小:94;小西:90;小伍:76;小迪:64;小曼:76";
+
+		document.write(data.getFullYear()+"年"+data.getMonth()+"月"+data.getDate()+"日"+"&nbsp;&nbsp;"+week[data.getDay()]+"<br>");
+		var st1 = study.split(';');
+		var sum = 0;
+		for(var i=0;i<st1.length;i++){
+			sum += parseInt(st1[i].split(':')[1]);
+		}
+		document.write("班级总分为："+sum+"<br>");
+		document.write("班级平均分为："+Math.round(sum/(st1.length)))
+	</script>
+
+	<hr>
+	问题六<br>
+	做一个简单的计时器<br>
+	<br><br>
+	答<br>
+	<span id="jishiqi_5"></span>
+	<script type="text/javascript">
+		var cli = function(){
+			var time = new Date();
+			var seconds = round(time.getSeconds());
+			var minutes = round(time.getMinutes());
+			attime = time.getHours()+":"+minutes+":"+seconds;
+			document.getElementById("jishiqi_5").innerHTML= attime;
+		}
+		var round = function(time){
+			if(time < 10){
+				time =  "0" + time
+			}
+			return time;
+		}
+		setInterval(cli, 1000)
+	</script>
+
+	<hr>
+	问题七<br>
+	制作一个跳转提示页面：<br>
+
+	要求：<br>
+
+	1. 如果打开该页面后，如果不做任何操作则5秒后自动跳转到一个新的地址，如慕课网主页。<br>
+
+	2. 如果点击“返回”按钮则返回前一个页面。<br>
+	<br></br>
+
+	答<br>
+	<span id="sec">5</span>
+	<a href="javascript:back();">返回</a>
+	<script type="text/javascript">
+
+		function lic(){
+			number = document.getElementById("sec").innerHTML;
+			number--;
+			document.getElementById("sec").innerHTML = number
+			if(document.getElementById("sec").innerHTML<0){
+        location.assign("http://www.imooc.com");
+			}
+		}
+		// setInterval(lic, 1000);
+		//通过window的location和history对象来控制网页的跳转。
+    function back(){
+      window.history.back();
+    }
+	</script>
 </body>
 </html>
