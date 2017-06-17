@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+	<title>dome 事件流</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	使用事件处理程序<br>
+	1.HTML事件处理程序<br>
+	2.DOM0级事件处理程序<br>
+		较传统的方式:把一个函数赋值给一个事件的处理程序属性用的比较多的方法  简单 跨浏览器的优势<br>
+	3.DOM2级事件处理程序<br />
+		DOM2级事件定义了两个方法:<br />
+		用于处理指定和删除时间处理程序的操作<br />
+		addEventListener()和removeEventListner()<br />
+		接收三个参数:要处理的事件名、作为事件处理程序的函数和布尔值<br />
+	事件对象<br />
+	什么是事件对象？在触发DOM上的时间时都会产生一个对象<br />
+	时间对象event<br />
+	1、DOM中的事件对象<br />
+		(1)、type属性 用于获取事件类型<br />
+		(2)、target属性 用于获取事件目标<br />
+		(3)、stopPropagation()方法 用于阻止事件冒泡<br />
+		(4)、preventDefault()方法 阻止事件的默认行为<br />
+	2、IE中的事件对象<br />
+		(1)、type属性 用于获取事件类型<br />
+		(2)、srcElement属性 用于获取事件的目标 <br />
+		(3)、cancelBubble属性 用于阻止事件冒泡<br />
+			设置为true表示阻止冒泡  设置为false表示不阻止冒泡<br />
+		(4)、returnValue属性 用于阻止事件的默认行为<br />
+			设置为false表示阻止事件默认行为<br />
+	<hr>
+	<div id="box">
+		<input type="button" value="按钮" id="btn" onclick="showMessage()">
+		<input type="button" value="按钮2" id="btn2">
+		<input type="button" value="按钮3" id="btn3">
+		<a href="改变属性.html" id="go">条装</a>
+	</div>
+	<script>
+		function showMessage(event){
+			event=event || window.event;
+			var ele=event.target || event.srcElement;
+			alert(ele.nodeName)
+			//阻止事件冒泡
+			event.stopPropagation();
+		}
+		function showBox(){
+			alert("这是放box盒子的");
+		}
+		function stopGo(event){
+			event.stopPropagation();
+			event.preventDefault();
+		}
+		var btn2 = document.getElementById("btn2");
+		var btn3 = document.getElementById("btn3");
+		var box = document.getElementById("box");
+		var go = document.getElementById("go");
+		btn2.onclick = function(){
+			alert("这是通过Dom0级添加的事件！");
+		}
+		//Dom2级事件
+		// btn3.addEventListener("click",showMessage,false);
+		// btn3.addEventListener("click",function(){
+		// 	alert(this.value);
+		// });
+		// IE事件处理程序 attachEvent()添加事件 detachEvent()删除事件
+		// btn3.attachEvent('onclick',showMessage);
+		// btn3.detachEvent('onclick',showMessage);
+		//封装  跨浏览器
+		var eventUti={
+			//添加句柄
+			addHandler:function(element,type,handler){
+				if(element.addEventListener){
+					element.addEventListener(type,handler,false);
+				}else if(element.attachEvent){
+					element.attachEvent('on'+type,handler)
+				}else{
+					element['on'+type]=handler;
+				}
+			},
+			//删除句柄
+			removeHandler:function(element,type,handler){
+				if(element.removeEventListener){
+					element.removeEventListener(type,handler,false);
+				}else if(element.detachEvent){
+					element.detachEvent('on'+type,handler)
+				}else{
+					element['on'+type]=null;
+				}
+			}
+		}
+		eventUti.addHandler(btn3,'click',showMessage);
+		eventUti.addHandler(box,'click',showBox)
+		eventUti.addHandler(go,'click',stopGo)
+	</script>
+</body>
+</html>
